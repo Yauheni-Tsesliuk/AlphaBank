@@ -12,7 +12,7 @@ export default defineConfig({
     ['allure-playwright', { resultsDir: 'allure-results' }],
   ],
   use: {
-    baseURL: process.env.BASE_URL || 'https://alphabank.example.com',
+    baseURL: process.env.BASE_URL || 'https://www.google.com/',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'on-first-retry',
@@ -22,7 +22,7 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
-    {
+  /*  {
       name: 'firefox',
       use: { ...devices['Desktop Firefox'] },
     },
@@ -33,6 +33,6 @@ export default defineConfig({
     {
       name: 'mobile-chrome',
       use: { ...devices['Pixel 5'] },
-    },
+    },*/
   ],
 });
