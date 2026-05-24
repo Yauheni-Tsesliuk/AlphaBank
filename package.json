@@ -1,0 +1,18 @@
+{
+  "name": "alphabank-playwright",
+  "version": "1.0.0",
+  "description": "Playwright test automation framework for AlphaBank",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "report:allure": "allure serve allure-results",
+    "report:html": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.44.0",
+    "allure-playwright": "^3.0.0",
+    "typescript": "^5.4.5"
+  }
+}
