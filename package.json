@@ -11,7 +11,7 @@
     "report:html": "playwright show-report"
   },
   "devDependencies": {
-    "@playwright/test": "^1.44.0",
+    "@playwright/test": "^1.60.0",
     "allure-playwright": "^3.0.0",
     "dotenv": "^17.4.2",
     "typescript": "^5.4.5"
