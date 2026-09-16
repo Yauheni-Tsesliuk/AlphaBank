@@ -1,11 +1,6 @@
-export interface UserCredentials {
-  email: string;
-  password: string;
-}
-
 export const testUsers = {
   defaultUser: {
-    email: 'TestEvg@test.com',
-    password: 'Pass123',
+    email: 'test123456@test.com',
+    password: '1234567890',
   },
 } as const;

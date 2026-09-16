@@ -21,6 +21,7 @@ export class HomePage extends BasePage {
     await this.goto('/');
   }
 
+  //default
   async login(email: string, password: string) {
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
