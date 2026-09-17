@@ -7,6 +7,7 @@ export class HomePage extends BasePage {
   private readonly loginButton: Locator;
   private readonly cartQuantity: Locator;
   private readonly body: Locator;
+  private readonly logo: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -15,6 +16,7 @@ export class HomePage extends BasePage {
     this.loginButton = page.locator('[name="login"]');
     this.cartQuantity = page.locator('.quantity');
     this.body = page.locator('body');
+    this.logo = page.locator('img[alt="My Store"]');
   }
 
   async open() {
@@ -26,6 +28,10 @@ export class HomePage extends BasePage {
     await this.emailInput.fill(email);
     await this.passwordInput.fill(password);
     await this.loginButton.click();
+  }
+
+  async clickLogo(){
+    this.logo.click();
   }
 
   async getCartQuantity() {
