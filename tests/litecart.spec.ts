@@ -2,17 +2,21 @@ import { expect, test } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
 import { OrderPage } from '../pages/OrderPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
+import { LoginPage } from '../pages';
 import { testUsers } from '../test_data/users';
+import { errors } from '../test_data/login_errors';
 
 test.describe('LiteCart Store Tests', () => {
   let homePage: HomePage;
   let orderPage: OrderPage;
   let checkoutPage: CheckoutPage;
+  let loginPage: LoginPage; 
 
   test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page);
     orderPage = new OrderPage(page);
     checkoutPage = new CheckoutPage(page);
+    loginPage = new LoginPage(page);
 
     await homePage.open();
     await expect(homePage.getCartQuantityLocator()).toHaveText('0');
@@ -39,7 +43,7 @@ test.describe('LiteCart Store Tests', () => {
     await expect(checkoutPage.getOrderSuccessElement()).toBeVisible();
   });
 
-  test.only('Order without login', async ({ page }) => {
+  test('Order without login', async ({ page }) => {
     const quantityValue = 3;
     const ducks = ['Blue Duck', 'Red Duck'];
     for (const duck of ducks) {
@@ -47,6 +51,11 @@ test.describe('LiteCart Store Tests', () => {
       await homePage.clickLogo();
     }
     await homePage.checkRecentlyViewed(ducks);
+  });
+
+   test.only('Invalid Login', async ({ page }) => {
+    await homePage.login('mhender@uspsp.top', '12345');
+    loginPage.checkNoticeErrors(errors.invalidLogin);
   });
 
 });
