@@ -17,14 +17,6 @@ export class BasePage {
     await this.page.goto(path, { waitUntil: 'domcontentloaded' });
   }
 
-  async getTitle() {
-    return this.page.title();
-  }
-
-  async isVisible(selector: string) {
-    return this.page.locator(selector).isVisible();
-  }
-
   async selectGoods(itemValue: string, quantityValue: number) {
     await this.page.locator(`a.link[title="${itemValue}"]`).first().click();
     // Ожидаем загрузки страницы товара

@@ -21,7 +21,3 @@ export class CheckoutPage extends BasePage {
         return this.orderSuccess;
     }
 }
-
-
-
-

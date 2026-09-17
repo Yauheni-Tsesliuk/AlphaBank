@@ -55,7 +55,7 @@ test.describe('LiteCart Store Tests', () => {
 
    test('Invalid Login', async ({ page }) => {
     await homePage.login('mhender@uspsp.top', '12345');
-    loginPage.checkNoticeErrors(errors.invalidLogin);
+    await loginPage.checkNoticeErrors(errors.invalidLogin);
   });
 
 });
