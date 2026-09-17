@@ -1,4 +1,4 @@
-import { type Page, type Locator } from '@playwright/test';
+import { type Page, type Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class HomePage extends BasePage {
@@ -30,8 +30,20 @@ export class HomePage extends BasePage {
     await this.loginButton.click();
   }
 
-  async clickLogo(){
+  async clickLogo() {
     this.logo.click();
+  }
+
+  async checkRecentlyViewed(values: string[]) {
+
+
+    for (const value of values) {
+      let productSlug = value
+        .toLowerCase()
+        .replace(/\s+/g, '-');
+
+      expect(this.page.locator(`#box-recently-viewed-products a[href*="${productSlug}"]`)).toBeVisible();;
+    }
   }
 
   async getCartQuantity() {

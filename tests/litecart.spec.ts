@@ -22,32 +22,31 @@ test.describe('LiteCart Store Tests', () => {
   test('Order of a single item without a discount', async ({ page }) => {
     const { email, password } = testUsers.defaultUser;
     await homePage.login(email, password);
-    const  quantityValue = 3;
-    const selectedPrice = await orderPage.selectGoods('Blue Duck',  quantityValue);
+    const quantityValue = 3;
+    const selectedPrice = await orderPage.selectGoods('Blue Duck', quantityValue);
     const price = selectedPrice ? selectedPrice : '$0';
-    await checkoutPage.verifyAndConfirmOrder(price,  quantityValue);
+    await checkoutPage.verifyAndConfirmOrder(price, quantityValue);
     await expect(checkoutPage.getOrderSuccessElement()).toBeVisible();
   });
 
   test('Order of a single item with a discount', async ({ page }) => {
     const { email, password } = testUsers.defaultUser;
     await homePage.login(email, password);
-    const  quantityValue = 2;
-    const selectedPrice = await orderPage.selectFirstSaleGoods( quantityValue);
+    const quantityValue = 2;
+    const selectedPrice = await orderPage.selectFirstSaleGoods(quantityValue);
     const price = selectedPrice ? selectedPrice : '$0';
-    await checkoutPage.verifyAndConfirmOrder(price,  quantityValue);
+    await checkoutPage.verifyAndConfirmOrder(price, quantityValue);
     await expect(checkoutPage.getOrderSuccessElement()).toBeVisible();
   });
 
   test.only('Order without login', async ({ page }) => {
-   const  quantityValue = 3;
-    await orderPage.selectGoods('Blue Duck',  quantityValue);
+    const quantityValue = 3;
+    const ducks = ['Blue Duck', 'Red Duck'];
+    await homePage.selectGoods(ducks[0], quantityValue);
     await homePage.clickLogo();
-    await orderPage.selectGoods('Red Duck',  quantityValue);
-
-
-
-     await page.waitForTimeout(20000); 
+    await homePage.selectGoods(ducks[1], quantityValue);
+    await homePage.clickLogo();
+    await homePage.checkRecentlyViewed(ducks);
   });
 
 });
