@@ -35,14 +35,12 @@ export class HomePage extends BasePage {
   }
 
   async checkRecentlyViewed(values: string[]) {
-
-
     for (const value of values) {
       let productSlug = value
         .toLowerCase()
         .replace(/\s+/g, '-');
 
-      expect(this.page.locator(`#box-recently-viewed-products a[href*="${productSlug}"]`)).toBeVisible();;
+      await expect(this.page.locator(`#box-recently-viewed-products a[href*="${productSlug}"]`)).toBeVisible();
     }
   }
 

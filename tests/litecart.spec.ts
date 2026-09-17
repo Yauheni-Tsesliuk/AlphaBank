@@ -42,10 +42,10 @@ test.describe('LiteCart Store Tests', () => {
   test.only('Order without login', async ({ page }) => {
     const quantityValue = 3;
     const ducks = ['Blue Duck', 'Red Duck'];
-    await homePage.selectGoods(ducks[0], quantityValue);
-    await homePage.clickLogo();
-    await homePage.selectGoods(ducks[1], quantityValue);
-    await homePage.clickLogo();
+    for (const duck of ducks) {
+      await homePage.selectGoods(duck, quantityValue);
+      await homePage.clickLogo();
+    }
     await homePage.checkRecentlyViewed(ducks);
   });
 
