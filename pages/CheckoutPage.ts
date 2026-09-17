@@ -1,4 +1,4 @@
-import { type Page, type Locator } from '@playwright/test';
+import { type Page, type Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class CheckoutPage extends BasePage {
@@ -11,7 +11,9 @@ export class CheckoutPage extends BasePage {
         this.orderSuccess = page.locator('div[id="box-order-success"]');
     }
 
-    async verifyAndConfirmOrder() {
+    async verifyAndConfirmOrder(priceValue: string, countGoods: number) {
+        expect(this.page.locator('p').filter({ hasText: priceValue })).toBeVisible();
+        expect(this.page.locator(`input[name="quantity"][value="${countGoods}"]`)).toBeVisible();
         await this.confirmOrder.click();
     }
 

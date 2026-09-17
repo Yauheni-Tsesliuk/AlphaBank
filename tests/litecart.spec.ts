@@ -9,23 +9,35 @@ test.describe('LiteCart Store Tests', () => {
   let orderPage: OrderPage;
   let checkoutPage: CheckoutPage;
 
+
+
   test.beforeEach(async ({ page }) => {
     homePage = new HomePage(page);
     orderPage = new OrderPage(page);
     checkoutPage = new CheckoutPage(page);
-    
+
     await homePage.open();
     await expect(homePage.getCartQuantityLocator()).toHaveText('0');
+
   });
 
   test('Order of a single item without a discount', async ({ page }) => {
     const { email, password } = testUsers.defaultUser;
     await homePage.login(email, password);
-    await orderPage.selectGoods('Blue Duck', 3);
-    await checkoutPage.verifyAndConfirmOrder();
+    const countGoods = 3;
+    const selectedPrice = await orderPage.selectGoods('Blue Duck', countGoods);
+    const price = selectedPrice ? selectedPrice : '$0';
+    await checkoutPage.verifyAndConfirmOrder(price, countGoods);
     await expect(checkoutPage.getOrderSuccessElement()).toBeVisible();
-   
-    await page.waitForTimeout(20000);
-   
+  });
+
+  test.only('Order of a single item with a discount', async ({ page }) => {
+    const { email, password } = testUsers.defaultUser;
+    await homePage.login(email, password);
+    const countGoods = 2;
+    const selectedPrice = await orderPage.selectFirstSaleGoods(countGoods);
+    const price = selectedPrice ? selectedPrice : '$0';
+    await checkoutPage.verifyAndConfirmOrder(price, countGoods);
+    await expect(checkoutPage.getOrderSuccessElement()).toBeVisible();
   });
 });
