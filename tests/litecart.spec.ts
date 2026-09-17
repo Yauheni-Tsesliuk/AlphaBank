@@ -53,7 +53,7 @@ test.describe('LiteCart Store Tests', () => {
     await homePage.checkRecentlyViewed(ducks);
   });
 
-   test.only('Invalid Login', async ({ page }) => {
+   test('Invalid Login', async ({ page }) => {
     await homePage.login('mhender@uspsp.top', '12345');
     loginPage.checkNoticeErrors(errors.invalidLogin);
   });
